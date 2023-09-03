@@ -1,12 +1,13 @@
 //Kodi per sliderin e search bar
 
+
 var fotoArray = [
-    "furntiure1.jpg",
-    "furntiure2.jpg",
-    "furntiure3.jpg",
-    "furntiure4.jpg",
-    "furntiure6.jpg",
-    "furntiure7.jfif",
+    "images/furntiure1.jpg",
+    "images/furntiure2.jpg",
+    "images/furntiure3.jpg",
+    "images/furntiure4.jpg",
+    "images/furntiure6.jpg",
+    "images/furntiure7.jfif",
 
 ];
 var i = 0;
@@ -20,3 +21,35 @@ function ndrroImg(){
     setTimeout('ndrroImg()', 6000);
 }
 document.body.addEventListener('load' , ndrroImg());
+
+/*Slider Carousel */
+const gap = 16;
+
+const carousel = document.getElementById("carousel"),
+  content = document.getElementById("content"),
+  next = document.getElementById("next"),
+  prev = document.getElementById("prev");
+
+next.addEventListener("click", e => {
+  carousel.scrollBy(width + gap, 0);
+  if (carousel.scrollWidth !== 0) {
+    prev.style.display = "flex";
+  }
+  if (content.scrollWidth - width - gap <= carousel.scrollLeft + width) {
+    next.style.display = "none";
+  }
+});
+prev.addEventListener("click", e => {
+  carousel.scrollBy(-(width + gap), 0);
+  if (carousel.scrollLeft - width - gap <= 0) {
+    prev.style.display = "none";
+  }
+  if (!content.scrollWidth - width - gap <= carousel.scrollLeft + width) {
+    next.style.display = "flex";
+  }
+});
+
+let width = carousel.offsetWidth;
+window.addEventListener("resize", e => (width = carousel.offsetWidth));
+/*End of Carousel */
+
